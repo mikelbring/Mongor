@@ -60,20 +60,5 @@ class Model {
    {
       return $this->_db->ensure_index($this->_collection, $keys);
    }
-
-   public function generate_code($length = 6)
-   {
-      $code = strtolower(Text::random('alnum', $length));
-
-      $check = $this->get(array('code' => $code), array('code'));
-
-      if(!$check)
-      {
-         return $code;
-      }
-
-      return $this->generate_code();
-   }
-
-
+   
 }
