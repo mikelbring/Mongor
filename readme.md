@@ -2,12 +2,11 @@
 
 ## For more information on Laravel, visit [http://laravel.com](http://laravel.com/ "Laravel")
 
-### Inspired by https://github.com/Wouterrr/MangoDB
-
-Move config/mongor.php to /application/config and edit credentials.
+Inspired by https://github.com/Wouterrr/MangoDB
 
 ### How to use
 
+* Move config/mongor.php to /application/config and edit credentials.
 * Create a model that extends Mongor\Model.
 * Each model is attached to a collection in the database
 * Create a variable `protected $_collection = 'user';` where user is the collection name
