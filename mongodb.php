@@ -26,7 +26,7 @@ class MongoDB {
 			if ($config === NULL)
 			{
 				// Load the configuration for this database
-				$config = \Config::get('mongo.' . $name);
+				$config = \Config::get('mongor.' . $name);
 			}
 
 			new MongoDB($name,$config);
