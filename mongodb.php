@@ -145,12 +145,12 @@ class MongoDB {
 		}
 		catch (MongoConnectionException $e)
 		{
-			exit('Unable to connect to MongoDB server at :hostnames');
+			throw new \Exception('Unable to connect to MongoDB server at ' . $config['hostnames']);
 		}
 
 		if (!isset($config['database']))
 		{
-			exit('No database specified in MangoDB Config');
+			throw new \Exception('No database specified in MangoDB Config');
 		}
 
 		$this->_db = $this->_connection->selectDB($config['database']);
