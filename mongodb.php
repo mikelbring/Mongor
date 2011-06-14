@@ -4,21 +4,21 @@ namespace Mongor;
 
 class MongoDB {
 
-   /**
-    * Database instances
-    * 
-    * @var array
-    */
+	/**
+	* Database instances
+	*
+	* @var array
+	*/
 	public static $instances = array();
 
-   /**
-    * Load instance
-    *
-    * @static
-    * @param string $name
-    * @param array|null $config
-    * @return MangoDB
-    */
+	/**
+	 * Load instance
+	 *
+	 * @static
+	 * @param string $name
+	 * @param array|null $config
+	 * @return MangoDB
+	 */
 	public static function instance($name = 'default', array $config = NULL)
 	{
 		if ( ! isset(self::$instances[$name]))
@@ -36,44 +36,44 @@ class MongoDB {
 	}
 
 	/**
-    * Instance name
-    *
-    * @var string
-    */
+	 * Instance name
+	 *
+	 * @var string
+	 */
 	protected $_name;
 
 	/**
-    * Connected
-    * 
-    * @var bool
-    */
+	 * Connected
+	 *
+	 * @var bool
+	 */
 	protected $_connected = FALSE;
 
 	/**
-    * Raw server connection
-    *
-    * @var Mongo
-    */
+	 * Raw server connection
+	 *
+	 * @var Mongo
+	 */
 	protected $_connection;
 
 	/**
-    * Raw database connection
-    * 
-    * @var Mongo Database
-    */
+	 * Raw database connection
+	 *
+	 * @var Mongo Database
+	 */
 	protected $_db;
 
 	/**
-    * Local config
-    * 
-    * @var array
-    */
+	 * Local config
+	 *
+	 * @var array
+	 */
 	protected $_config;
 
-   /**
-    * @param  $name
-    * @param array $config
-    */
+	/**
+	 * @param  $name
+	 * @param array $config
+	 */
 	protected function __construct($name, array $config)
 	{
 		$this->_name = $name;
@@ -94,11 +94,11 @@ class MongoDB {
 		return $this->_name;
 	}
 
-   /**
-    * Connect to MongoDB, select database
-    * 
-    * @return bool
-    */
+	/**
+	 * Connect to MongoDB, select database
+	 *
+	 * @return bool
+	 */
 	public function connect()
 	{
 		if ($this->_connection)
@@ -106,23 +106,23 @@ class MongoDB {
 			return;
 		}
 
-      /**
-       * Add required variables
-       * Clear the connection parameters for security
-       */
+		/**
+		 * Add required variables
+		 * Clear the connection parameters for security
+		 */
 		$config = $this->_config['connection'] + array(
 			'hostnames'  => 'localhost:27017'
 		);
 
 		unset($this->_config['connection']);
 
-      /* Add Username & Password to server string */
+		/* Add Username & Password to server string */
 		if (isset($config['username']) && isset($config['password']))
 		{
 			$config['hostnames'] = $config['username'] . ':' . $config['password'] . '@' . $config['hostnames'] . '/' . $config['database'];
 		}
 
-      /* Add required 'mongodb://' prefix */
+		/* Add required 'mongodb://' prefix */
 		if (strpos($config['hostnames'], 'mongodb://') !== 0)
 		{
 			$config['hostnames'] = 'mongodb://' . $config['hostnames'];
@@ -138,8 +138,8 @@ class MongoDB {
 
 		$this->_connection = new \Mongo($config['hostnames'], $options);
 
-      /* Try connect */
-      try
+		/* Try connect */
+		try
 		{
 			$this->_connection->connect();
 		}
@@ -158,11 +158,11 @@ class MongoDB {
 		return $this->_connected = TRUE;
 	}
 
-   /**
-    * Disconnect from MongoDB
-    *
-    * @returns null
-    */
+	/**
+	 * Disconnect from MongoDB
+	 *
+	 * @returns null
+	 */
 	public function disconnect()
 	{
 		if ($this->_connection)
@@ -379,7 +379,7 @@ class MongoDB {
 		));
 	}
 
-   /* Run Command */
+	/* Run Command */
 	protected function _call($command, array $arguments = array(), array $values = NULL)
 	{
 		$this->_connected OR $this->connect();
@@ -428,7 +428,7 @@ class MongoDB {
 			break;
 			case 'insert':
 				$r = $c->insert($values, $options);
-                                return $values;
+										  return $values;
 			break;
 			case 'remove':
 				$r = $c->remove($criteria, $options);
@@ -452,7 +452,7 @@ class MongoDB {
 				$r = $this->gridFS()->remove($criteria, $options);
 			break;
 		}
-
+	
 		return $r;
 	}
 }
