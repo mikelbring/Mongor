@@ -1,6 +1,4 @@
-<?php
-
-namespace Mongor;
+<?php namespace Mongor;
 
 class MongoDB {
 

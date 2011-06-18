@@ -1,6 +1,4 @@
-<?php
-
-namespace Mongor;
+<?php namespace Mongor;
 
 class Model {
 
@@ -32,15 +30,14 @@ class Model {
 
 	}
 
-
 	/**
 	 * Insert a document
 	 *
-	 * @param  $insert
-	 * @param bool $options
+	 * @param  array $insert
+	 * @param  bool  $options
 	 * @return MongoDB Object
 	 */
-	public  function insert($insert, $options =  true)
+	public function insert(array $insert, $options =  true)
 	{
 		return $this->_db->insert($this->_collection, $insert, $options);
 	}
@@ -48,11 +45,11 @@ class Model {
 	/**
 	 * Get a single document
 	 *
-	 * @param  $get
-	 * @param array $fields
+	 * @param  array $get
+	 * @param  array $fields
 	 * @return Mongodb Object
 	 */
-	public function get($get, $fields = array())
+	public function get(array $get, array $fields = array())
 	{
 		return $this->_db->find_one($this->_collection, $get, $fields);
 	}
@@ -60,21 +57,22 @@ class Model {
 	/**
 	 * Update a document
 	 *
-	 * @param  $criteria
-	 * @param  $update
+	 * @param  array $criteria
+	 * @param  array $update
+	 * @param  array $array
 	 * @return null
 	 */
-	public  function update($criteria, $update)
+	public function update(array $criteria, array $update, array $options = array())
 	{
-		return $this->_db->update($this->_collection, $criteria, $update);
+		return $this->_db->update($this->_collection, $criteria, $update, $options);
 	}
 
 	/**
 	 * Find documents
 	 *
-	 * @param array $query
-	 * @param array $fields
-	 * @return array | MongoDB Object
+	 * @param  array $query
+	 * @param  array $fields
+	 * @return MongoDB Object
 	 */
 	public function find($query = array(), $fields = array())
 	{
@@ -91,10 +89,10 @@ class Model {
 	/**
 	 * Delete a document
 	 *
-	 * @param  $criteria
+	 * @param  array $criteria
 	 * @return null
 	 */
-	public function delete($criteria)
+	public function delete(array$criteria)
 	{
 		return $this->_db->remove($this->_collection, $criteria, false);
 	}
@@ -103,7 +101,7 @@ class Model {
 	 * Set an index for collection
 	 *
 	 * @param  $keys
-	 * @return null
+	 * @return void
 	 */
 	public function set_index($keys)
 	{
