@@ -15,7 +15,7 @@ return array(
 	'GET /update' => function()
 	{
 		$user = User::where(array('username' => 'mike'))->first();
-		//$user = User::where('username', 'mike')->first();
+		// $user = User::where('username', 'mike')->first();
 		$user->email = 'email@domain.com';
 		$user->save();
 
