@@ -176,6 +176,18 @@ class Model {
 	}
 
 	/**
+	 * Set the eagerly loaded models on the queryable model.
+	 *
+	 * @return Model
+	 */
+	private function _with()
+	{
+		$this->includes = func_get_args();
+
+		return $this;
+	}
+
+	/**
 	 * Set the creation and update timestamps on the model.
 	 *
 	 * Uses the time() method
