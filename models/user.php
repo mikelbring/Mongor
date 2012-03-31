@@ -9,9 +9,9 @@ class User extends Mongor\Model {
 		return $this->username;
 	}
 
-	public function anime()
+	public function story()
 	{
-		return $this->has_and_belongs_to_many('Anime', 'User\Anime', 'user_id', 'anime_id');
+		return $this->has_and_belongs_to_many('Story', 'User\Story', 'user_id', 'anime_id');
 	}
 
 }
